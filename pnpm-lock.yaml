@@ -8,31 +8,40 @@ importers:
 
   .:
     dependencies:
+      '@ai-sdk/openai-compatible':
+        specifier: 1.0.46
+        version: 1.0.46(zod@4.5.4)
+      '@libsql/client':
+        specifier: ^0.18.0
+        version: 0.18.0
       '@mastra/core':
         specifier: latest
-        version: 1.64.0(zod@4.5.4)
+        version: 1.65.0(zod@4.5.4)
       '@mastra/duckdb':
         specifier: latest
-        version: 1.6.4(@mastra/core@1.64.0(zod@4.5.4))
+        version: 1.7.0(@mastra/core@1.65.0(zod@4.5.4))
       '@mastra/libsql':
         specifier: latest
-        version: 1.22.3(@mastra/core@1.64.0(zod@4.5.4))
+        version: 1.22.4(@mastra/core@1.65.0(zod@4.5.4))
       '@mastra/memory':
         specifier: latest
-        version: 1.28.2(@mastra/core@1.64.0(zod@4.5.4))
+        version: 1.28.3(@mastra/core@1.65.0(zod@4.5.4))
       '@mastra/observability':
         specifier: latest
-        version: 1.17.5(@mastra/core@1.64.0(zod@4.5.4))(zod@4.5.4)
+        version: 1.17.6(@mastra/core@1.65.0(zod@4.5.4))(zod@4.5.4)
+      undici:
+        specifier: ^8.10.2
+        version: 8.10.2
       zod:
         specifier: ^4.4.3
         version: 4.5.4
     devDependencies:
       '@types/node':
         specifier: latest
-        version: 26.4.1
+        version: 26.5.0
       mastra:
         specifier: latest
-        version: 1.27.3(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.64.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)
+        version: 1.28.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.65.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -68,6 +77,18 @@ packages:
         optional: true
       express:
         optional: true
+
+  '@ai-sdk/openai-compatible@1.0.46':
+    resolution: {integrity: sha512-l++VpNaAntmdp2zqUhfHJy11hGJGvsjQW4yFXv5pJ3kh0xOlrz8X3IUvlygrJJtdsuSdPzbhk2CWuclJV2Z1Eg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/provider-utils@3.0.30':
+    resolution: {integrity: sha512-NCJ9JKow5ENAgEZxzvEvF20thwDiH+hutvzmrUDbloRX0azpJHNst8+7pZIVryYhLM9wgpT5/ShTSjPTFhkxEQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
 
   '@ai-sdk/provider-utils@4.0.40':
     resolution: {integrity: sha512-OL5IrpUm9Y8Dwy+w/vvFwPotS6m52O9W0op2oXgXdCROMJIBalBI0oro6OIBYkPxvm5Xg02GSkoQN25RlR0bnw==}
@@ -471,8 +492,14 @@ packages:
   '@libsql/client@0.17.4':
     resolution: {integrity: sha512-lYayFWasDV78A+TjlEhr6ubb3odBV6OHjb+wdp8VQcyWWAEIjuwbCHaraEUS4m4yWoo0BvZo96It4VdzZRmRWw==}
 
+  '@libsql/client@0.18.0':
+    resolution: {integrity: sha512-zMCCo58vv7w27j7+cnt/GW+X6/Rih6cHZ86PKi0AxCMOqMfrVgG9OZ5lW2bDMJhSeOjsv2szH2nJF3A9l36UmA==}
+
   '@libsql/core@0.17.4':
     resolution: {integrity: sha512-LqF9gIvnJ38nmAH1y/ChizHqDO/MO1wLgA96XrraulEEbqXxLjleSH92YWTolbuJKgPUmGu4aJk9W3UnAcxLOQ==}
+
+  '@libsql/core@0.18.0':
+    resolution: {integrity: sha512-N8RR2CIpcgtbKZnXs2KVpw2lJQfinUj3I56e7qRDRpK18Hty0Rr8nr00VmFb4R/DsqOanPB/TaP3+QAQLZeXMg==}
 
   '@libsql/darwin-arm64@0.5.29':
     resolution: {integrity: sha512-K+2RIB1OGFPYQbfay48GakLhqf3ArcbHqPFu7EZiaUcRgFcdw8RoltsMyvbj5ix2fY0HV3Q3Ioa/ByvQdaSM0A==}
@@ -533,26 +560,26 @@ packages:
     resolution: {integrity: sha512-qC72D4+CDdjGqJvkFMMEAtancHUQ7/d/tAiHf64z8MopFDmcrtbcJuerDtFceuAfQJ2pDSfCKCtbqoGBNnwg0w==}
     engines: {node: '>=8'}
 
-  '@mastra/core@1.64.0':
-    resolution: {integrity: sha512-+fuvDeORYWIb+SJrGQlXQi6r1JCxd05g3SNCDepnO910j4uqxMWf5s22Ta0sRSR5zbKRx2NUZoWPAfQt2xF4hQ==}
+  '@mastra/core@1.65.0':
+    resolution: {integrity: sha512-FHis85lEo19XkpSfFcyVsTnm7HROzSEIr1zpwhs3ApaCpJNZJaBAyxZ5IEPUyZMd2QT1N+qFTC6yMGijHMLt0w==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
 
-  '@mastra/deployer@1.64.0':
-    resolution: {integrity: sha512-gArW+LCcscMSl+cWl/FebSipuvm5dOq/xqzFnwDR/tc3C2LfrThRkF76Qp61q2BCMWntpHG2LqyNQcN7pCpuxg==}
+  '@mastra/deployer@1.65.0':
+    resolution: {integrity: sha512-mTxSpsXCWzkhsx1cmR9Yyilk5J1BYd7YbAdxQmlgVaxLlZumSBJ5cbHOTc7jjIYrEvw25dpk6mTmvirRnwDvpg==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.50.0-0 <2.0.0-0'
 
-  '@mastra/duckdb@1.6.4':
-    resolution: {integrity: sha512-8XkS/qUcMjG9AmH9acF42YkBm0PsnxeOCOH2hIF22y5gUojO/lpvCWSciP7NrpG3nUB35ft2I9m1zvevihrqBw==}
+  '@mastra/duckdb@1.7.0':
+    resolution: {integrity: sha512-JTKhCHI0R91RdEtV/Zu61ffutKtEdW16n4oYyIokWjBN/pfjfsboWi0K3gq6qS4mQaOvGu9AGADMm4KsCAmErA==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.58.0-0 <2.0.0-0'
 
-  '@mastra/libsql@1.22.3':
-    resolution: {integrity: sha512-XFAUq3lPW6ujQUgs9YADYsvwfr6W8Te8Y1Cq3UJKs2hAZMIwN9xY9heJsDpJ76a6VzR6TF8hLxQBiLLrfIUV/A==}
+  '@mastra/libsql@1.22.4':
+    resolution: {integrity: sha512-vb3fCn+5PtRoJLswGBm5H6N8XbNul2yxrodOYTpdPN16jPABYJ/aK/UTY6/xMdfC0OgJA/DKA23yQGXywUveLw==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.63.1-0 <2.0.0-0'
@@ -563,27 +590,27 @@ packages:
     peerDependencies:
       '@mastra/core': '>=1.0.0-0 <2.0.0-0'
 
-  '@mastra/memory@1.28.2':
-    resolution: {integrity: sha512-XneY2QdmC/nUjfaax7z4Qdnsw6WgsFWc1QZFd79AkQHl0g0bDvpwjQlbDZ6wnZ2YygRDCWVt0Ew3dDI2Ao3QXg==}
+  '@mastra/memory@1.28.3':
+    resolution: {integrity: sha512-ijdWOHkBA660ZK8PJRXltmioGhNPOXTJY++cMdg5Wo92aHt1+mCmKJUEVFfAVTowukC84VudTW7C73p1N3t0Zw==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.4.1-0 <2.0.0-0'
 
-  '@mastra/observability@1.17.5':
-    resolution: {integrity: sha512-V7W+b1YSNtIR6aMlIPL72RInIi1hOV0IfH39i2vYm4Q4sy3BWhpcVDmvvZKmX4VlH82Jmt81UuuYqfPac8UFug==}
+  '@mastra/observability@1.17.6':
+    resolution: {integrity: sha512-BUlzG+Np/iuGIxyz79i2/GeuDFtS2G6ItMEwEsLTEXeyGEET21/z0eYlV4c1xy1FtSZKSNUkriE1sIOErXfUNw==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.16.0-0 <2.0.0-0'
       zod: ^3.25.0 || ^4.0.0
 
-  '@mastra/schema-compat@1.3.8':
-    resolution: {integrity: sha512-uGGQlb/QAIgghHf/FQLfnpHbUMXWWJDFlv0FQ/p0K6TjT8OVdWC9uNPdwQmFYu8Fzut4Z+LmzNkJ5S378/41Ew==}
+  '@mastra/schema-compat@1.3.9':
+    resolution: {integrity: sha512-9qoxJzODLwUwGod2g5nv6yT7Nd2ImSAydz+699Gvxj8u8Jwg6icBMbS7cqk/DFQZlZvJED0N0w6kxkp+Ay/qcg==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
 
-  '@mastra/server@1.64.0':
-    resolution: {integrity: sha512-Sp7weOqW4myF81Ucfx1PG2ZV9JbcoN8nIV3GNvgP3zuP0MiJMLJiZnciTQgNdh3Fl9vhv7XKw6U8cvbGrxhc2g==}
+  '@mastra/server@1.65.0':
+    resolution: {integrity: sha512-hHklFTwOZjiUnm71RrzdaTiZuwtKpblC68RhITxlB4+Y0kAQBHMNtQ/lFpsMz0NlEZtzdG9X+7zQbFh+QmwO8Q==}
     engines: {node: '>=22.13.0'}
     peerDependencies:
       '@mastra/core': '>=1.50.0-0 <2.0.0-0'
@@ -868,6 +895,9 @@ packages:
 
   '@types/node@26.4.1':
     resolution: {integrity: sha512-k97ENvZWtvA6yqz5/FS6a7duDgOPEeOQOc2iKS/nY6mX6qJUKtLnWzQS+Xj6tXweyj6ZcTAK2Qecetnvi9nCLA==}
+
+  '@types/node@26.5.0':
+    resolution: {integrity: sha512-dVSGpriSoCgz8WnDNTuSSuSv1PC/ALXihO4ulRZt7Md8k9mlbdin3lGOcDE8SnWOgf513ByWlXd7BK4azmyg/A==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -1447,8 +1477,8 @@ packages:
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
-  mastra@1.27.3:
-    resolution: {integrity: sha512-X8OJo3U+edUThIkOz2uATE3YN2jCpDxH8bbCZPj1WDta5SXsFnly27HUpL7gCWoOlN6qlgq8X6h1QtfNNzZ5Yw==}
+  mastra@1.28.0:
+    resolution: {integrity: sha512-OkYn0FgNvhvDtPoWg99U7SQs0XOtdlhjpRZYMnB0KbD95nc0DI3Ni9VYM2HZNV2IJFnIzASQb/3IfiGXVsUKFA==}
     engines: {node: '>=22.13.0'}
     hasBin: true
     peerDependencies:
@@ -1944,6 +1974,13 @@ packages:
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
+  undici-types@8.9.0:
+    resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
+
+  undici@8.10.2:
+    resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
+    engines: {node: '>=22.19.0'}
+
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
@@ -2049,6 +2086,19 @@ snapshots:
     dependencies:
       jose: 6.2.12
       uuid: 11.1.1
+
+  '@ai-sdk/openai-compatible@1.0.46(zod@4.5.4)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.3
+      '@ai-sdk/provider-utils': 3.0.30(zod@4.5.4)
+      zod: 4.5.4
+
+  '@ai-sdk/provider-utils@3.0.30(zod@4.5.4)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.3
+      '@standard-schema/spec': 1.1.0
+      eventsource-parser: 3.1.1
+      zod: 4.5.4
 
   '@ai-sdk/provider-utils@4.0.40(zod@4.5.4)':
     dependencies:
@@ -2418,7 +2468,22 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  '@libsql/client@0.18.0':
+    dependencies:
+      '@libsql/core': 0.18.0
+      '@libsql/hrana-client': 0.10.0
+      js-base64: 3.9.3
+      libsql: 0.5.29
+      promise-limit: 2.7.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@libsql/core@0.17.4':
+    dependencies:
+      js-base64: 3.9.3
+
+  '@libsql/core@0.18.0':
     dependencies:
       js-base64: 3.9.3
 
@@ -2471,7 +2536,7 @@ snapshots:
     dependencies:
       '@lukeed/csprng': 1.1.0
 
-  '@mastra/core@1.64.0(zod@4.5.4)':
+  '@mastra/core@1.65.0(zod@4.5.4)':
     dependencies:
       '@a2a-js/sdk-v0_3': '@a2a-js/sdk@0.3.14'
       '@a2a-js/sdk-v1': '@a2a-js/sdk@1.0.1'
@@ -2482,7 +2547,7 @@ snapshots:
       '@ai-sdk/provider-v7': '@ai-sdk/provider@4.0.4'
       '@isaacs/ttlcache': 2.1.5
       '@lukeed/uuid': 2.0.1
-      '@mastra/schema-compat': 1.3.8(zod@4.5.4)
+      '@mastra/schema-compat': 1.3.9(zod@4.5.4)
       '@modelcontextprotocol/server': 2.0.0
       '@sindresorhus/slugify': 2.2.1
       '@standard-schema/spec': 1.1.0
@@ -2516,14 +2581,14 @@ snapshots:
       - utf-8-validate
       - workflow
 
-  '@mastra/deployer@1.64.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.64.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)':
+  '@mastra/deployer@1.65.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.65.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)':
     dependencies:
       '@babel/core': 8.0.1
       '@babel/preset-typescript': 8.0.1(@babel/core@8.0.1)
       '@babel/traverse': 8.0.4
       '@hono/node-ws': 1.3.1(@hono/node-server@1.19.17(hono@4.13.7))(hono@4.13.7)
-      '@mastra/core': 1.64.0(zod@4.5.4)
-      '@mastra/server': 1.64.0(@mastra/core@1.64.0(zod@4.5.4))(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
+      '@mastra/server': 1.65.0(@mastra/core@1.65.0(zod@4.5.4))(zod@4.5.4)
       '@optimize-lodash/rollup-plugin': 5.1.0(rollup@4.63.1)
       '@rollup/plugin-commonjs': 29.0.2(rollup@4.63.1)
       '@rollup/plugin-esm-shim': 0.1.8(rollup@4.63.1)
@@ -2554,29 +2619,29 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@mastra/duckdb@1.6.4(@mastra/core@1.64.0(zod@4.5.4))':
+  '@mastra/duckdb@1.7.0(@mastra/core@1.65.0(zod@4.5.4))':
     dependencies:
       '@duckdb/node-api': 1.5.2-r.2
-      '@mastra/core': 1.64.0(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
 
-  '@mastra/libsql@1.22.3(@mastra/core@1.64.0(zod@4.5.4))':
+  '@mastra/libsql@1.22.4(@mastra/core@1.65.0(zod@4.5.4))':
     dependencies:
       '@libsql/client': 0.17.4
-      '@mastra/core': 1.64.0(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@mastra/loggers@1.3.1(@mastra/core@1.64.0(zod@4.5.4))':
+  '@mastra/loggers@1.3.1(@mastra/core@1.65.0(zod@4.5.4))':
     dependencies:
-      '@mastra/core': 1.64.0(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
       pino: 10.3.1
       pino-pretty: 13.1.3
 
-  '@mastra/memory@1.28.2(@mastra/core@1.64.0(zod@4.5.4))':
+  '@mastra/memory@1.28.3(@mastra/core@1.65.0(zod@4.5.4))':
     dependencies:
-      '@mastra/core': 1.64.0(zod@4.5.4)
-      '@mastra/schema-compat': 1.3.8(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
+      '@mastra/schema-compat': 1.3.9(zod@4.5.4)
       async-mutex: 0.5.0
       diff: 8.0.4
       json-schema: 0.4.0
@@ -2588,20 +2653,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mastra/observability@1.17.5(@mastra/core@1.64.0(zod@4.5.4))(zod@4.5.4)':
+  '@mastra/observability@1.17.6(@mastra/core@1.65.0(zod@4.5.4))(zod@4.5.4)':
     dependencies:
-      '@mastra/core': 1.64.0(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
       zod: 4.5.4
 
-  '@mastra/schema-compat@1.3.8(zod@4.5.4)':
+  '@mastra/schema-compat@1.3.9(zod@4.5.4)':
     dependencies:
       json-schema-to-zod: 2.8.1
       zod: 4.5.4
       zod-from-json-schema: 0.5.6
 
-  '@mastra/server@1.64.0(@mastra/core@1.64.0(zod@4.5.4))(zod@4.5.4)':
+  '@mastra/server@1.65.0(@mastra/core@1.65.0(zod@4.5.4))(zod@4.5.4)':
     dependencies:
-      '@mastra/core': 1.64.0(zod@4.5.4)
+      '@mastra/core': 1.65.0(zod@4.5.4)
       hono: 4.13.7
       zod: 4.5.4
 
@@ -2806,6 +2871,10 @@ snapshots:
   '@types/node@26.4.1':
     dependencies:
       undici-types: 8.3.0
+
+  '@types/node@26.5.0':
+    dependencies:
+      undici-types: 8.9.0
 
   '@types/resolve@1.20.2': {}
 
@@ -3321,15 +3390,15 @@ snapshots:
 
   markdown-table@3.0.4: {}
 
-  mastra@1.27.3(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.64.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4):
+  mastra@1.28.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.65.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4):
     dependencies:
       '@babel/parser': 8.0.4
       '@babel/types': 8.0.4
       '@clack/prompts': 1.7.0
       '@expo/devcert': 1.2.1
-      '@mastra/core': 1.64.0(zod@4.5.4)
-      '@mastra/deployer': 1.64.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.64.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)
-      '@mastra/loggers': 1.3.1(@mastra/core@1.64.0(zod@4.5.4))
+      '@mastra/core': 1.65.0(zod@4.5.4)
+      '@mastra/deployer': 1.65.0(@hono/node-server@1.19.17(hono@4.13.7))(@mastra/core@1.65.0(zod@4.5.4))(typescript@6.0.3)(zod@4.5.4)
+      '@mastra/loggers': 1.3.1(@mastra/core@1.65.0(zod@4.5.4))
       archiver: 8.0.0
       commander: 14.0.3
       dotenv: 17.4.2
@@ -4072,6 +4141,10 @@ snapshots:
   ufo@1.6.4: {}
 
   undici-types@8.3.0: {}
+
+  undici-types@8.9.0: {}
+
+  undici@8.10.2: {}
 
   unicorn-magic@0.3.0: {}
 

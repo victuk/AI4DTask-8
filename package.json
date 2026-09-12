@@ -1,13 +1,16 @@
 {
   "name": "task-8",
   "version": "1.0.0",
-  "description": "A general-purpose Mastra agent with a local workspace, shell tools, memory, task tracking, web access, and recurring schedules.",
+  "description": "Agentic AI code review system: a supervisor agent coordinates specialist review agents (correctness, security, architecture, performance, quality, testing) over git diffs, commits and pull requests.",
   "main": "index.js",
   "private": true,
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
-    "start": "mastra start"
+    "start": "mastra start",
+    "review": "node cli/review.mjs",
+    "eval:setup": "node evaluation/setup.mjs",
+    "eval:run": "node evaluation/run.mjs"
   },
   "keywords": [],
   "author": "",
@@ -17,11 +20,14 @@
     "node": ">=22.13.0"
   },
   "dependencies": {
+    "@ai-sdk/openai-compatible": "1.0.46",
+    "@libsql/client": "^0.18.0",
     "@mastra/core": "latest",
     "@mastra/duckdb": "latest",
     "@mastra/libsql": "latest",
     "@mastra/memory": "latest",
     "@mastra/observability": "latest",
+    "undici": "^8.10.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {

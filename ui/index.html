@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeMind — Agentic Code Review</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">🧠</span> CodeMind <span class="sub">agentic code review</span></div>
+  <div class="top-actions">
+    <span id="model-chip" class="chip" title="MODEL_NAME used by the review agents">model: …</span>
+    <span id="health-chip" class="chip dot" title="Backend status">●</span>
+  </div>
+</header>
+
+<nav class="tabs" id="main-tabs">
+  <button class="tab active" data-view="new">New review</button>
+  <button class="tab" data-view="history">History</button>
+  <button class="tab" data-view="agents">Agents</button>
+</nav>
+
+<main id="app">
+  <!-- ================= New review ================= -->
+  <section id="view-new" class="view">
+    <div class="card narrow">
+      <h2>Start a code review</h2>
+      <div class="seg" id="source-seg">
+        <button class="seg-btn active" data-src="commit">Commit</button>
+        <button class="seg-btn" data-src="repository">Working tree</button>
+        <button class="seg-btn" data-src="pr">Pull request</button>
+        <button class="seg-btn" data-src="diff">Paste diff</button>
+      </div>
+
+      <!-- commit / worktree / shared repo picker -->
+      <div class="field" data-for-src="commit repository">
+        <label>Repository path <span class="hint">absolute path to a local git repo</span></label>
+        <div class="row">
+          <input id="repo-path" type="text" placeholder="/home/you/projects/my-repo" spellcheck="false">
+          <button id="btn-load-repo" class="btn ghost">Load</button>
+        </div>
+        <div id="repo-info" class="repo-info hidden"></div>
+      </div>
+
+      <div class="field" data-for-src="commit">
+        <label>Commit <span class="hint">the commit whose diff will be reviewed</span></label>
+        <select id="commit-select"><option value="">— load a repository first —</option></select>
+      </div>
+
+      <div class="field" data-for-src="pr">
+        <label>Pull request URL <span class="hint">GitHub pull or GitLab merge_requests URL</span></label>
+        <input id="pr-url" type="text" placeholder="https://github.com/owner/repo/pull/123" spellcheck="false">
+        <div class="row">
+          <button id="btn-load-prs" class="btn ghost">List open PRs</button>
+          <span class="hint" id="pr-token-hint"></span>
+        </div>
+        <div id="pr-list" class="pr-list hidden"></div>
+      </div>
+
+      <div class="field" data-for-src="diff">
+        <label>Unified diff</label>
+        <textarea id="diff-text" rows="10" placeholder="Paste the output of git diff …" spellcheck="false"></textarea>
+        <div class="field">
+          <label>Context repository <span class="hint">optional — lets agents read the real code</span></label>
+          <input id="diff-repo-path" type="text" placeholder="/path/to/repo (optional)" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Options</label>
+        <label class="check"><input type="checkbox" id="opt-post"> Post findings to the pull request (inline comments)</label>
+        <label class="check"><input type="checkbox" id="opt-skip-validation"> Skip cross-validation of high severity findings</label>
+      </div>
+
+      <div id="new-error" class="error hidden"></div>
+      <button id="btn-start" class="btn primary big">🔍 Start agentic review</button>
+    </div>
+  </section>
+
+  <!-- ================= History ================= -->
+  <section id="view-history" class="view hidden">
+    <div class="row spread">
+      <h2>Review history</h2>
+      <div class="row">
+        <select id="compare-a" class="compact"></select>
+        <span>↔</span>
+        <select id="compare-b" class="compact"></select>
+        <button id="btn-compare" class="btn ghost">Compare</button>
+      </div>
+    </div>
+    <div id="history-list" class="history"></div>
+  </section>
+
+  <!-- ================= Agents ================= -->
+  <section id="view-agents" class="view hidden">
+    <h2>Review panel</h2>
+    <p class="dim">The Code Review Supervisor plans each review, delegates to the relevant specialists below, cross-validates high severity findings with a second specialist, then consolidates the report.</p>
+    <div id="agents-grid" class="agents-grid"></div>
+  </section>
+
+  <!-- ================= Review detail ================= -->
+  <section id="view-review" class="view hidden">
+    <div class="row spread wrap">
+      <div>
+        <button id="btn-back" class="btn ghost small">← All reviews</button>
+        <h2 id="review-title" class="title-line"></h2>
+        <div id="review-meta" class="dim"></div>
+      </div>
+      <div class="row">
+        <button id="btn-download" class="btn ghost small">⬇ Markdown</button>
+        <button id="btn-post-pr" class="btn ghost small hidden">💬 Post to PR</button>
+        <button id="btn-refresh" class="btn ghost small">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="stepper" id="stepper"></div>
+    <div id="review-error" class="error hidden"></div>
+
+    <div id="verdict-banner" class="verdict hidden"></div>
+
+    <div class="grid-2">
+      <div class="col">
+        <div class="card">
+          <h3>Supervisor plan</h3>
+          <div id="plan-box" class="plan-box dim">Waiting for the supervisor…</div>
+        </div>
+        <div class="card">
+          <h3>Specialist activity</h3>
+          <div id="agent-activity" class="activity"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="row spread">
+            <h3>Findings <span id="finding-count" class="pill"></span></h3>
+            <div class="filters">
+              <select id="filter-severity" class="compact"><option value="">All severities</option></select>
+              <select id="filter-category" class="compact"><option value="">All categories</option></select>
+              <select id="filter-file" class="compact"><option value="">All files</option></select>
+            </div>
+          </div>
+          <div id="report-summary" class="summary hidden"></div>
+          <div id="positives" class="positives hidden"></div>
+          <div id="findings-list" class="findings"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row spread">
+        <h3>Changed files</h3>
+        <span id="diff-stats" class="dim mono"></span>
+      </div>
+      <div id="diff-view" class="diff-view dim">Diff appears here once the review starts.</div>
+    </div>
+  </section>
+
+  <!-- ================= Compare ================= -->
+  <section id="view-compare" class="view hidden">
+    <button id="btn-back-compare" class="btn ghost small">← All reviews</button>
+    <h2 id="compare-title"></h2>
+    <div id="compare-body"></div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/app.js"></script>
+</body>
+</html>

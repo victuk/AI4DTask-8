@@ -1,0 +1,215 @@
+{
+  "scenarios": [
+    {
+      "repo": "payments-service",
+      "name": "Payments: correctness + security",
+      "expected": [
+        {
+          "id": "pay-1",
+          "area": "security",
+          "file": "src/charges.js",
+          "severityAtLeast": "critical",
+          "keywords": ["sql", "injection", "interpolation", "concatenat"]
+        },
+        {
+          "id": "pay-2",
+          "area": "security",
+          "file": "src/charges.js",
+          "severityAtLeast": "critical",
+          "keywords": ["hardcoded", "hard-coded", "secret", "api key", "api_key", "credential"]
+        },
+        {
+          "id": "pay-3",
+          "area": "correctness",
+          "file": "src/charges.js",
+          "severityAtLeast": "high",
+          "keywords": ["balance", "double", "subtract", "amountcents", "discounted twice", "incorrect calculation"]
+        },
+        {
+          "id": "pay-4",
+          "area": "correctness",
+          "file": "src/charges.js",
+          "severityAtLeast": "medium",
+          "keywords": ["negative", "validation", "validate", "amount", "zero"]
+        },
+        {
+          "id": "pay-5",
+          "area": "correctness",
+          "file": "src/refunds.js",
+          "severityAtLeast": "medium",
+          "keywords": ["catch", "swallow", "error handling", "continues", "logged"]
+        },
+        {
+          "id": "pay-6",
+          "area": "testing",
+          "file": "src/charges.js",
+          "severityAtLeast": "medium",
+          "keywords": ["test"]
+        }
+      ]
+    },
+    {
+      "repo": "inventory-api",
+      "name": "Inventory API: security + concurrency + contract",
+      "expected": [
+        {
+          "id": "inv-1",
+          "area": "security",
+          "file": "src/routes/admin.js",
+          "severityAtLeast": "critical",
+          "keywords": ["flush-cache", "authorization", "auth", "requireadmin", "unprotected", "missing auth"]
+        },
+        {
+          "id": "inv-2",
+          "area": "security",
+          "file": "src/parse-webhook.js",
+          "severityAtLeast": "critical",
+          "keywords": ["eval", "code execution", "injection", "arbitrary"]
+        },
+        {
+          "id": "inv-3",
+          "area": "concurrency",
+          "file": "src/services/stock.js",
+          "severityAtLeast": "high",
+          "keywords": ["race", "concurrent", "oversell", "atomic", "lock"]
+        },
+        {
+          "id": "inv-4",
+          "area": "performance",
+          "file": "src/services/stock.js",
+          "severityAtLeast": "medium",
+          "keywords": ["n+1", "query in loop", "loop", "per-sku", "round trip"]
+        },
+        {
+          "id": "inv-5",
+          "area": "database",
+          "file": "src/services/stock.js",
+          "severityAtLeast": "medium",
+          "keywords": ["transaction"]
+        }
+      ]
+    },
+    {
+      "repo": "metrics-dashboard",
+      "name": "Dashboard: performance + quality",
+      "expected": [
+        {
+          "id": "dash-1",
+          "area": "performance",
+          "file": "src/reports.ts",
+          "severityAtLeast": "high",
+          "keywords": ["n+1", "sequential", "await in loop", "per user", "round trips", "requests"]
+        },
+        {
+          "id": "dash-2",
+          "area": "performance",
+          "file": "src/reports.ts",
+          "severityAtLeast": "medium",
+          "keywords": ["o(n", "quadratic", "rowswithflags", "copy", "scan"]
+        },
+        {
+          "id": "dash-3",
+          "area": "correctness",
+          "file": "src/reports.ts",
+          "severityAtLeast": "medium",
+          "keywords": ["sort", "top", "slice", "before sorting", "picktopusers"]
+        },
+        {
+          "id": "dash-4",
+          "area": "performance",
+          "file": "src/cache.ts",
+          "severityAtLeast": "medium",
+          "keywords": ["unbounded", "grows", "eviction", "memory", "leak"]
+        },
+        {
+          "id": "dash-5",
+          "area": "testing",
+          "file": "src/reports.ts",
+          "severityAtLeast": "low",
+          "keywords": ["test"]
+        }
+      ]
+    },
+    {
+      "repo": "billing-data",
+      "name": "Billing data: transactions + migration",
+      "expected": [
+        {
+          "id": "bill-1",
+          "area": "correctness",
+          "file": "src/invoices.js",
+          "severityAtLeast": "critical",
+          "keywords": ["transaction", "partial", "rollback", "atomic"]
+        },
+        {
+          "id": "bill-2",
+          "area": "database",
+          "file": "migrations/007_add_invoices.js",
+          "severityAtLeast": "high",
+          "keywords": ["destructive", "drop column", "data loss", "backup", "irreversible", "legacy_number"]
+        },
+        {
+          "id": "bill-3",
+          "area": "database",
+          "file": "migrations/007_add_invoices.js",
+          "severityAtLeast": "medium",
+          "keywords": ["not null", "default", "constraint", "nullable"]
+        },
+        {
+          "id": "bill-4",
+          "area": "performance",
+          "file": "src/invoices.js",
+          "severityAtLeast": "low",
+          "keywords": ["loop", "insert in loop", "n+1", "batch"]
+        }
+      ]
+    },
+    {
+      "repo": "search-service",
+      "name": "Search refactor: quality + subtle regression",
+      "expected": [
+        {
+          "id": "ref-1",
+          "area": "correctness",
+          "file": "src/pagination.js",
+          "severityAtLeast": "high",
+          "keywords": ["off-by-one", "negative", "page 1", "first page", "pagination", "1-indexed", "start calculation"]
+        },
+        {
+          "id": "ref-2",
+          "area": "quality",
+          "file": "src/tokenize.js",
+          "severityAtLeast": "medium",
+          "keywords": ["dead code", "commented", "tokenizeold", "leftover"]
+        },
+        {
+          "id": "ref-3",
+          "area": "quality",
+          "file": "src/tokenize.js",
+          "severityAtLeast": "medium",
+          "keywords": ["console.log", "debug", "logging", "leftover"]
+        },
+        {
+          "id": "ref-4",
+          "area": "quality",
+          "file": "src/tokenize.js",
+          "severityAtLeast": "low",
+          "keywords": ["duplicate", "normalizecopy", "identical", "duplicated function"]
+        },
+        {
+          "id": "ref-5",
+          "area": "testing",
+          "file": "src/pagination.js",
+          "severityAtLeast": "medium",
+          "keywords": ["test"]
+        }
+      ]
+    },
+    {
+      "repo": "feature-flag-service",
+      "name": "Feature flags: clean change (noise control)",
+      "expected": [],
+      "notes": "Well-tested, well-documented change. The system should produce at most low/suggestion findings and APPROVE / APPROVE_WITH_COMMENTS."
+    }
+  ]
+}
