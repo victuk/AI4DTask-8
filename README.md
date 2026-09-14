@@ -201,32 +201,6 @@ npm run eval:run            # review each PR commit and score detection
 
 `npm run eval:run` prints a per-scenario score (detected/expected) and an overall detection rate, written to `evaluation/results.json`.
 
-
-### Tuning knobs (optional environment variables)
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `REVIEW_MAX_STEPS` | `14` | Max LLM steps per specialist agent (tool-call loop budget). |
-| `REVIEW_SUPERVISOR_STEPS` | `20` | Max steps for supervisor planning/consolidation calls. |
-| `REVIEW_AGENTS` | _(all planned)_ | Comma-separated allowlist, e.g. `correctness,security`, to focus/bound a review. |
-| `REVIEW_DB_URL` | `file:./reviews.db` | Review history database. |
-| `REPO_CACHE_DIR` | `.repos` | Where remote clones are stored. |
-| `OLLAMA_BASE_URL` | _(off)_ | Enables a local Ollama gateway (`MODEL_NAME=ollama/<model>`) so the pipeline can run without a hosted key. Long local generations get a 30-min HTTP timeout automatically. |
-
-If planning or consolidation fails mid-review (e.g. a very small model), the engine degrades gracefully: planning falls back to the full specialist panel, and consolidation falls back to a deterministic merge (dedupe + severity sort + recommendation) so completed specialist work is never lost.
-
-## Testing the full pipeline locally without an API key
-
-```bash
-ollama pull qwen2.5:3b-instruct
-# in .env:
-#   OLLAMA_BASE_URL=http://localhost:11434
-#   MODEL_NAME=ollama/qwen2.5:3b-instruct
-npm run dev
-# then start a review from http://localhost:4111 — a 3B model on CPU is slow
-# (tens of minutes per review) but exercises the whole flow end to end.
-```
-
 ## Notes & design decisions
 
 - **Relevance-driven delegation** — the supervisor plans which specialists run; a docs-only change won't spin up the Security agent. The plan (with reasoning) is visible in the UI and stored with the review.

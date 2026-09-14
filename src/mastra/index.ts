@@ -24,6 +24,8 @@ import { OpenRouterGateway } from './review/openrouter-gateway';
 
 const specialistAgents = Object.fromEntries(specialistList.map((s) => [`${s.id}-agent`, s.agent]));
 
+const modelName = (process.env.MODEL_NAME!!).startsWith("openrouter/") ? process.env.MODEL_NAME : "openrouter/" + process.env.MODEL_NAME;
+
 const startReviewBody = z.object({
   sourceType: z.enum(['diff', 'commit', 'pr', 'repository']),
   repoPath: z.string().optional(),
@@ -51,7 +53,7 @@ const apiRoutes = [
     handler: async (c) =>
       json(c, {
         ok: true,
-        model: process.env.MODEL_NAME ?? 'openrouter/openai/gpt-4o-mini',
+        model: modelName ?? 'openrouter/openai/gpt-4o-mini',
         openrouterKeyConfigured: Boolean(process.env.OPENROUTER_API_KEY),
         githubTokenConfigured: Boolean(process.env.GITHUB_TOKEN),
         gitlabTokenConfigured: Boolean(process.env.GITLAB_TOKEN),

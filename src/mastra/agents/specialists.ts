@@ -11,7 +11,7 @@ import type { SpecialistId } from '../types.js';
 export function resolveModel(): string {
   const raw = process.env.MODEL_NAME?.trim();
   if (!raw) return 'openrouter/openai/gpt-4o-mini';
-  return raw.includes('/') ? raw : `openrouter/${raw}`;
+  return (process.env.MODEL_NAME!!).startsWith("openrouter/") ? process.env.MODEL_NAME!! : "openrouter/" + process.env.MODEL_NAME;
 }
 
 export interface SpecialistDef {
