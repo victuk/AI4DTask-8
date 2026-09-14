@@ -20,6 +20,7 @@ import { parseGitHubRepoUrl, listOpenPrs } from './review/github';
 import { parseGitLabProjectUrl, listOpenMrs } from './review/gitlab';
 import { z } from 'zod';
 import { OllamaGateway } from './review/ollama-gateway';
+import { OpenRouterGateway } from './review/openrouter-gateway';
 
 const specialistAgents = Object.fromEntries(specialistList.map((s) => [`${s.id}-agent`, s.agent]));
 
@@ -332,7 +333,7 @@ export const mastra = new Mastra({
     externals: ['@duckdb/node-bindings'],
   },
   gateways: {
-    ollama: new OllamaGateway(),
+    ollama: new OpenRouterGateway(),
   },
   agents: { supervisorAgent, ...specialistAgents },
   storage: new MastraCompositeStore({
